@@ -1,0 +1,13 @@
+.animatedPanel{
+    display: none;
+    z-index: 100;
+    position: absolute;
+    float: left;
+}
+.animatedPanel > *{
+    margin-right: 5px;
+    background-color: transparent;
+}
+.animatedPanel > *:hover {
+    background-color: rgba(0, 0, 0, 0,5);
+}

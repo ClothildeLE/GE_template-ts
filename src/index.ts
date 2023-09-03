@@ -1,5 +1,7 @@
-import './index.css';
-import { MyClass } from './example-unit';
+import { Board } from './Components/Board'
+import './index.css'
 
-const a = new MyClass(2);
-console.log('number is', a.get());
+
+
+const board = new Board()
+board.render()

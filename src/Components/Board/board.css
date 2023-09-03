@@ -1,0 +1,59 @@
+#board{
+    position: fixed;
+    background-image: url(../../assets/world.jpeg);
+    background-size: contain;
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.board_title{
+    font-size: large;
+    font-family: cursive;
+    color:  #563e09 ;
+    text-align: center;
+}
+.board_btn_panel{
+    justify-content: center;
+    display: flex;
+}
+
+button {
+    align-items: center;
+    background-color: #c7a45d;
+    border: 2px solid #4e3a07;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: flex;
+    font-family: Inter,sans-serif;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 5px;
+    margin-right: 10px;
+  }
+
+button.selected{
+background-color: #796336;
+}
+
+
+.board_content {
+    display: grid;
+    margin: 10px 40px 20px 40px;
+    height: calc(100vh - 130px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    grid-auto-rows: 240px;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-rows: 250px;
+    grid-auto-rows: 250px;
+    justify-items: center;
+    align-items: center;
+}
+
+
+
