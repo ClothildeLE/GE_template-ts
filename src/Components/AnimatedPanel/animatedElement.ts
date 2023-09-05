@@ -21,7 +21,6 @@ export class animatedElement {
   addEvent(){
     const parent = document.getElementById(this.parent.id)
     const panel = parent.getElementsByClassName("animatedPanel")[0] as HTMLElement
-    const self = this
     const scaleUpBtn = panel.getElementsByClassName("scaleUp_btn")[0] as HTMLElement
     const scaleDownBtn = panel.getElementsByClassName("scaleDown_btn")[0] as HTMLElement
     const rotateBtn = panel.getElementsByClassName("rotate_btn")[0] as HTMLElement
@@ -31,34 +30,34 @@ export class animatedElement {
 
 
     scaleUpBtn.onclick = () => {
-      self.scale++
-      parent.style.transform = self.getTransformStyle()
+      this.scale++
+      parent.style.transform = this.getTransformStyle()
     }
     scaleDownBtn.onclick = () => {
-      if(self.scale > 0) {
-        self.scale--
-        parent.style.transform = self.getTransformStyle()
+      if(this.scale > 0) {
+        this.scale--
+        parent.style.transform = this.getTransformStyle()
       }
     }
     rotateBtn.onclick = () => {
-      self.rotation++
-      if(self.rotation === 36){
-        self.rotation = 0
+      this.rotation++
+      if(this.rotation === 36){
+        this.rotation = 0
       }
-      parent.style.transform = self.getTransformStyle()
+      parent.style.transform = this.getTransformStyle()
     }
     copyBtn.onclick = () => {
-      self.parent.duplicateWatch()
+      this.parent.duplicateWatch()
 
     }
     removeBtn.onclick = () => {
-      self.parent.destroy()
+      this.parent.destroy()
     }
     moveBtn.onclick = () => {
-      self.parent.board.modal.render([
+      this.parent.board.modal.render([
         {id:"rowIndex", type:"number", label:"X-Position"},
         {id:"colIndex", type:"number", label:"Y-Position"}
-      ], self.parent.move, self.parent)
+      ], this.parent.move, this.parent)
     }
   }
 

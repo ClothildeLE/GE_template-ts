@@ -2,14 +2,20 @@ import { animatedElement } from "../AnimatedPanel"
 import { Board } from "../Board"
 import "./watch.css"
 
+enum changeMode  {
+  ADDSECOND = 0, //normal
+  ADDHOUR = 1,
+  ADDMINUTE = 2
+    
+}
+
 export class Watch {
-  date: Date
   hour: number
   minute: number
   seconde: number
-  mode: number // 0 , 1,2 : 1 for addHour, 2 for addMinute, 0 for anything
+  mode: changeMode // 0 , 1,2 : 1 for addHour, 2 for addMinute, 0 for anything
   constructor(public id :string ,private readonly title: string, private readonly timeZone : string, public board:Board) {
-    this.mode = 0
+    this.mode = changeMode.ADDSECOND
     this.initWatch();
   }
   render(parentElement: Element, afterElement: HTMLElement = null) {
@@ -43,14 +49,14 @@ export class Watch {
     }
     this.updateHTML()
   }
-  addTime(mode:number = 0){
+  addTime(mode: changeMode = changeMode.ADDSECOND){
     switch(mode){
       case 0:
         if(this.seconde < 59){
           this.seconde++
         } else { 
           this.seconde = 0
-          this.addTime(2)
+          this.addTime(changeMode.ADDMINUTE)
         }
         break
       case 1: // hours
@@ -65,7 +71,7 @@ export class Watch {
           this.minute++
         }else{
           this.minute = 0
-          this.addTime(1)
+          this.addTime(changeMode.ADDHOUR)
         }
         break
       
@@ -75,11 +81,10 @@ export class Watch {
 
   }
   initWatch(){ 
-    var currentDate = new Date()
-    this.date=new Date(Date.parse(currentDate.toLocaleString("en-US", {timeZone: this.timeZone})))
-    this.hour = this.date.getHours()
-    this.minute = this.date.getMinutes()
-    this.seconde = this.date.getSeconds()
+    const currentDate = new Date(Date.parse((new Date()).toLocaleString("en-US", { timeZone: this.timeZone })))
+    this.hour = currentDate.getHours()
+    this.minute = currentDate.getMinutes()
+    this.seconde = currentDate.getSeconds()
   }
   resetTime(){
     this.initWatch()
@@ -87,7 +92,6 @@ export class Watch {
 
   }
   addEvent(){
-    const self = this;
     const watchElement = document.getElementById(this.id)
     const animatedPanel = watchElement.getElementsByClassName("animatedPanel") as HTMLCollectionOf<HTMLElement>
     const modeBtn = document.getElementById(this.id+'_mode_btn')
@@ -96,16 +100,16 @@ export class Watch {
     const contentWatch  = document.getElementById(this.id + '_content')
 
     modeBtn.onclick = () => {
-      if(self.mode < 2){
-        self.mode++
+      if(this.mode < 2){
+        this.mode++
       }else{
-        self.mode = 0
+        this.mode = 0
       }
     }
     addBtn.onclick = () => {
-      if(self.mode === 1){
+      if(this.mode === 1){
         this.addTime(1)
-      }else if(self.mode === 2){
+      }else if(this.mode === 2){
         this.addTime(2)
       }
     }

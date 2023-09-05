@@ -40,10 +40,9 @@ export class Board {
 
   addEvent(){
 
-    const self = this;
-    let timeFlies = setInterval(function () {
-      let innerTimer = setInterval(function () {
-        self.timeFlies()
+    let timeFlies = setInterval( () => {
+      let innerTimer = setInterval( () => {
+        this.timeFlies()
         clearInterval(innerTimer);  // Clear inner interval after one execution
       }, 1000);
 
@@ -53,13 +52,13 @@ export class Board {
     const modal = document.getElementById("CreateWatchModal")
 
 
-    openCreateModalModalBtn.onclick = function() {
-       self.modal.render([{id: "title_watch", type: "text", label:"Title"}, {id:"timezone_watch", type: "select",label: "Time zone", listValue: utils.timezoneList}],self.createWatch,self)
+    openCreateModalModalBtn.onclick = () => {
+       this.modal.render([{id: "title_watch", type: "text", label:"Title"}, {id:"timezone_watch", type: "select",label: "Time zone", listValue: utils.timezoneList}],this.createWatch,this)
     }
 
     const resetTimeBtn = document.getElementById("resetWatch");
     resetTimeBtn.onclick = () => {
-      self.arrWatch.forEach((watch) => {
+      this.arrWatch.forEach((watch) => {
         watch.resetTime()
       })
     }
@@ -67,14 +66,14 @@ export class Board {
     const showAMPMBtn = document.getElementById("showAMPM");
     showAMPMBtn.onclick = () => {
       
-      if(self.AMPMMode){
+      if(this.AMPMMode){
         showAMPMBtn.classList.remove("selected")
       } else {
         showAMPMBtn.classList.add("selected")
       }
-      self.AMPMMode = ! self.AMPMMode
+      this.AMPMMode = ! this.AMPMMode
 
-      self.arrWatch.forEach((watch) => {
+      this.arrWatch.forEach((watch) => {
         watch.updateHTML()
       })
     }
